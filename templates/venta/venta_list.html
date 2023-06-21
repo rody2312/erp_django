@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-12">
+                <h2>Lista de Ventas</h2>
+                <a href="{% url 'venta_new' %}" class="btn btn-primary">Nueva Venta</a>
+                <br><br>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID Venta</th>
+                            <th>Número de Orden de Compra</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for venta in venta_list %}
+                        <tr>
+                            <td>{{ venta.id_venta }}</td>
+                            <td>{{ venta.n_orden_compra }}</td>
+                            <td>
+                                <a href="{% url 'venta_edit' venta.id_venta %}" class="btn btn-warning">Editar</a>
+                                <a href="{% url 'venta_delete' venta.id_venta %}" class="btn btn-danger">Eliminar</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
