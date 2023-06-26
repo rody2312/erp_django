@@ -1,32 +1,39 @@
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, DetailView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.shortcuts import redirect
+from django.urls import reverse_lazy
 from .models import Cliente
+from .forms import ClienteForm
 
 
 class ClienteListView(ListView):
     model = Cliente
-    template_name = 'cliente_list.html'
-    context_object_name = 'clientes'
+    template_name = 'cliente/cliente_list.html'
 
 
 class ClienteDetailView(DetailView):
     model = Cliente
-    template_name = 'cliente_detail.html'
-    context_object_name = 'cliente'
+    template_name = 'cliente/cliente_detail.html'
 
 
 class ClienteCreateView(CreateView):
     model = Cliente
-    template_name = 'cliente_create.html'
-    fields = '__all__'
+    form_class = ClienteForm
+    template_name = 'cliente/cliente_form.html'
+    success_url = reverse_lazy('cliente_list')
+
+    def form_valid(self, form):
+        self.object = form.save()
+        return redirect(self.success_url)
 
 
 class ClienteUpdateView(UpdateView):
     model = Cliente
-    template_name = 'cliente_update.html'
-    fields = '__all__'
+    form_class = ClienteForm
+    template_name = 'cliente/cliente_form.html'
 
 
 class ClienteDeleteView(DeleteView):
     model = Cliente
-    template_name = 'cliente_confirm_delete.html'
-    success_url = '/cliente/'  # URL a la que se redirige después de eliminar un cliente
+    template_name = 'cliente/cliente_confirm_delete.html'
+    success_url = reverse_lazy('cliente_list')
