@@ -1,0 +1,13 @@
+{% extends 'base.html' %} {% block title %}Detalle del Cliente{% endblock %} {%
+block content %}
+<h1>Detalle del Cliente</h1>
+<p>Nombre: {{ cliente.nombre_cliente }}</p>
+<p>Dirección: {{ cliente.direccion_cliente }}</p>
+<p>Código Postal: {{ cliente.codigo_postal_cliente }}</p>
+<p>Localidad: {{ cliente.localidad_cliente }}</p>
+<p>País: {{ cliente.pais_cliente }}</p>
+<p>Teléfono: {{ cliente.telefono_cliente }}</p>
+<p>Correo: {{ cliente.correo_cliente }}</p>
+<p>Área: {{ cliente.area_cliente }}</p>
+<p>Observaciones: {{ cliente.observaciones_cliente }}</p>
+{% endblock %}

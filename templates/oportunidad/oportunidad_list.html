@@ -1,41 +1,42 @@
-{% extends 'base.html' %}
-
-{% block title %}Oportunidades{% endblock title %}
-
-{% block content %}
-    <div class="container my-5">
-        <div class="row">
-            <div class="col-12">
-                <h2>Lista de Oportunidades</h2>
-                <a href="{% url 'oportunidad_new' %}" class="btn btn-primary">Nueva Cotización</a>
-                <br><br>
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Alcance</th>
-                            <!-- Otras cabeceras de tabla -->
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for oportunidad in object_list %}
-                            <tr>
-                                <td>{{ oportunidad.id_oportunidad }}</td>
-                                <td>
-                                    <a href="{% url 'oportunidad_detail' oportunidad.id_oportunidad %}">
-                                        {{ oportunidad.alcance }}
-                                    </a>
-                                </td>
-                                <!-- Otras celdas de la tabla -->
-                            </tr>
-                        {% empty %}
-                            <tr>
-                                <td colspan="5">No hay oportunidades registradas.</td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        </div>
+{% extends 'base.html' %} {% block title %} Oportunidades {% endblock %} {%
+block content %}
+<div class="container my-5">
+  <div class="row">
+    <div class="col-12">
+      <h2>Lista de Oportunidades</h2>
+      <a href="{% url 'oportunidad_new' %}" class="btn btn-primary"
+        >Nueva Cotización</a
+      >
+      <br /><br />
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Alcance</th>
+            <!-- Otras cabeceras de tabla -->
+          </tr>
+        </thead>
+        <tbody>
+          {% for oportunidad in object_list %}
+          <tr>
+            <td>{{ oportunidad.id_oportunidad }}</td>
+            <td>
+              <a
+                href="{% url 'oportunidad_detail' oportunidad.id_oportunidad %}"
+              >
+                {{ oportunidad.alcance }}
+              </a>
+            </td>
+            <!-- Otras celdas de la tabla -->
+          </tr>
+          {% empty %}
+          <tr>
+            <td colspan="2">No hay oportunidades registradas.</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
     </div>
+  </div>
+</div>
 {% endblock %}

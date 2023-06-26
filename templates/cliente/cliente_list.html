@@ -1,0 +1,34 @@
+{% extends 'base.html' %} {% block title %}Lista de Clientes{% endblock %} {%
+block content %}
+<h1>Lista de Clientes</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Dirección</th>
+      <th>Código Postal</th>
+      <th>Localidad</th>
+      <th>País</th>
+      <th>Teléfono</th>
+      <th>Correo</th>
+      <th>Área</th>
+      <th>Observaciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for cliente in clientes %}
+    <tr>
+      <td>{{ cliente.nombre_cliente }}</td>
+      <td>{{ cliente.direccion_cliente }}</td>
+      <td>{{ cliente.codigo_postal_cliente }}</td>
+      <td>{{ cliente.localidad_cliente }}</td>
+      <td>{{ cliente.pais_cliente }}</td>
+      <td>{{ cliente.telefono_cliente }}</td>
+      <td>{{ cliente.correo_cliente }}</td>
+      <td>{{ cliente.area_cliente }}</td>
+      <td>{{ cliente.observaciones_cliente }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
