@@ -34,6 +34,14 @@ class CotizacionUpdateView(UpdateView):
     model = Cotizacion
     form_class = CotizacionForm
     template_name = 'cotizacion/cotizacion_form.html'
+    success_url = reverse_lazy('cotizacion_list')
+
+    def form_valid(self, form):
+        # Guardar la nueva cotización
+        self.object = form.save()
+
+        # Redirigir a la lista de cotizaciones
+        return redirect(self.success_url)
 
 
 class CotizacionDeleteView(DeleteView):

@@ -35,6 +35,8 @@ class VentaUpdateView(UpdateView):
     model = Venta
     form_class = VentaForm
     template_name = 'venta/venta_form.html'
+    # Actualiza la URL de redirección aquí
+    success_url = reverse_lazy('venta_list')
 
 
 class VentaDeleteView(DeleteView):
