@@ -1,10 +1,6 @@
 from django.urls import path
 from .views import (
-    ClienteListView,
-    ClienteDetailView,
-    ClienteCreateView,
-    ClienteUpdateView,
-    ClienteDeleteView,
+    ClienteListView, ClienteDetailView, ClienteCreateView, ClienteUpdateView, ClienteDeleteView,
 )
 
 urlpatterns = [

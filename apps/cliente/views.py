@@ -31,6 +31,14 @@ class ClienteUpdateView(UpdateView):
     model = Cliente
     form_class = ClienteForm
     template_name = 'cliente/cliente_form.html'
+    success_url = reverse_lazy('cliente_list')
+
+    def form_valid(self, form):
+        # Guardar la nueva cotización
+        self.object = form.save()
+
+        # Redirigir a la lista de cotizaciones
+        return redirect(self.success_url)
 
 
 class ClienteDeleteView(DeleteView):

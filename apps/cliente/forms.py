@@ -7,6 +7,7 @@ class ClienteForm(forms.ModelForm):
         model = Cliente
         fields = '__all__'
         widgets = {
+            'id_cliente': forms.Select(attrs={'class': 'form-control'}),
             'nombre_cliente': forms.TextInput(attrs={'class': 'form-control'}),
             'direccion_cliente': forms.TextInput(attrs={'class': 'form-control'}),
             'codigo_postal_cliente': forms.TextInput(attrs={'class': 'form-control'}),
