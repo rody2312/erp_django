@@ -1,37 +1,66 @@
-{% extends 'base.html' %} {% block title %} Oportunidades {% endblock %} 
-{%block content %}
+{% extends 'base.html' %} {% block title %}Oportunidades{% endblock title %}
+{%load static %} {% block content %}
 <div class="container my-5">
   <div class="row">
     <div class="col-12">
       <h2>Lista de Oportunidades</h2>
       <a href="{% url 'oportunidad_new' %}" class="btn btn-primary"
-        >Nueva Cotización</a
+        >Nueva Oportunidad</a
       >
       <br /><br />
       <table class="table table-striped">
         <thead>
           <tr>
             <th>ID</th>
+            <th>Gestión Comercial</th>
+            <th>Cliente</th>
+            <th>Contacto</th>
+            <th>Proveedor</th>
+            <th>Área</th>
             <th>Alcance</th>
-            <!-- Otras cabeceras de tabla -->
+            <th>Fecha de Inicio</th>
+            <th>Fecha de Término</th>
+            <th>Monto Probable</th>
+            <th>Fecha de Facturación</th>
+            <th>Probabilidad A OC</th>
+            <th>Observaciones</th>
+            <th>Acciones</th>
           </tr>
         </thead>
         <tbody>
           {% for oportunidad in object_list %}
           <tr>
             <td>{{ oportunidad.id_oportunidad }}</td>
+            <td>{{ oportunidad.id_gestion_comercial }}</td>
+            <td>{{ oportunidad.id_cliente }}</td>
+            <td>{{ oportunidad.id_contacto }}</td>
+            <td>{{ oportunidad.id_proveedor }}</td>
+            <td>{{ oportunidad.id_area }}</td>
+            <td>{{ oportunidad.alcance }}</td>
+            <td>{{ oportunidad.fecha_inicio }}</td>
+            <td>{{ oportunidad.fecha_termino }}</td>
+            <td>{{ oportunidad.monto_probable }}</td>
+            <td>{{ oportunidad.fecha_facturacion }}</td>
+            <td>{{ oportunidad.probabilidad_a_oc }}</td>
+            <td>{{ oportunidad.observaciones }}</td>
             <td>
               <a
-                href="{% url 'oportunidad_detail' oportunidad.id_oportunidad %}"
+                href="{% url 'oportunidad_edit' oportunidad.id_oportunidad %}"
+                class="btn btn-warning"
+                >Editar</a
               >
-                {{ oportunidad.alcance }}
-              </a>
+              <a
+                href="{% url 'oportunidad_delete' oportunidad.id_oportunidad %}"
+                class="btn btn-danger"
+                >Eliminar</a
+              >
             </td>
-            <!-- Otras celdas de la tabla -->
           </tr>
           {% empty %}
           <tr>
-            <td colspan="2">No hay oportunidades registradas.</td>
+            <td colspan="{{ num_columns }}">
+              No hay oportunidades registradas.
+            </td>
           </tr>
           {% endfor %}
         </tbody>

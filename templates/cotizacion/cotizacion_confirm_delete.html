@@ -1,15 +1,13 @@
-{% extends 'base.html' %}
-
-{% block content %}
-    <div class="container my-5">
-        <div class="row">
-            <div class="col-12">
-                <h2>¿Deseas eliminar la Cotización: {{ cotizacion.id_cotizacion }}?</h2>
-                <form method="post">
-                    {% csrf_token %}
-                    <button class="btn btn-danger" type="submit">Eliminar</button>
-                </form>
-            </div>
-        </div>
+{% extends 'base.html' %} {% block content %}
+<div class="container my-5">
+  <div class="row">
+    <div class="col-12">
+      <h2>¿Deseas eliminar la Cotización: {{ cotizacion.id_cotizacion }}?</h2>
+      <form method="post">
+        {% csrf_token %}
+        <button class="btn btn-danger" type="submit">Eliminar</button>
+      </form>
     </div>
+  </div>
+</div>
 {% endblock %}
