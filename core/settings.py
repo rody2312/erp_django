@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'apps.cotizacion',
     'apps.venta',
     'apps.cliente',
-    'apps.proveedor'
+    'apps.proveedor',
+
 ]
 
 MIDDLEWARE = [

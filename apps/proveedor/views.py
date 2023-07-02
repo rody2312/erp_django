@@ -1,6 +1,6 @@
-from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from .models import Proveedor
 from .forms import ProveedorForm

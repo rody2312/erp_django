@@ -3,7 +3,7 @@ static %} {% block content %}
 <div class="container my-5">
   <div class="row">
     <div class="col-12">
-      <h2>Lista de Proveedor</h2>
+      <h2>Lista de Proveedores</h2>
       <a href="{% url 'proveedor_new' %}" class="btn btn-primary"
         >Nuevo Proveedor</a
       >
@@ -52,7 +52,7 @@ static %} {% block content %}
           </tr>
           {% empty %}
           <tr>
-            <td colspan="5">No hay proveedores registrados.</td>
+            <td colspan="11">No hay proveedores registrados.</td>
           </tr>
           {% endfor %}
         </tbody>

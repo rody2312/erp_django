@@ -1,4 +1,4 @@
-{% extends 'base.html' %} {% block title %}Clientes{% endblock title %} {%load
+{% extends 'base.html' %} {% block title %}Clientes{% endblock title %} {% load
 static %} {% block content %}
 <div class="container my-5">
   <div class="row">
@@ -37,7 +37,6 @@ static %} {% block content %}
             <td>{{ cliente.correo_cliente }}</td>
             <td>{{ cliente.area_cliente }}</td>
             <td>{{ cliente.observaciones_cliente }}</td>
-
             <td>
               <a
                 href="{% url 'cliente_edit' cliente.id_cliente %}"
