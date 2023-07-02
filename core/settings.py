@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'apps.oportunidad',
     'apps.cotizacion',
     'apps.venta',
-    'apps.cliente'
+    'apps.cliente',
+    'apps.proveedor'
 ]
 
 MIDDLEWARE = [

@@ -1,0 +1,19 @@
+{% extends 'base.html' %} {% block title %}Detalle del Proveedor{% endblock %}
+{% block content %}
+<div class="container my-5">
+  <div class="row">
+    <div class="col-12">
+      <h2>Detalle del Proveedor</h2>
+      <p>Nombre: {{ proveedor.nombre_proveedor }}</p>
+      <p>Dirección: {{ proveedor.direccion_proveedor }}</p>
+      <p>Código Postal: {{ proveedor.codigo_postal_proveedor }}</p>
+      <p>Localidad: {{ proveedor.localidad_proveedor }}</p>
+      <p>País: {{ proveedor.pais_proveedor }}</p>
+      <p>Teléfono: {{ proveedor.telefono_proveedor }}</p>
+      <p>Correo: {{ proveedor.correo_proveedor }}</p>
+      <p>Área: {{ proveedor.area_proveedor }}</p>
+      <p>Observaciones: {{ proveedor.observaciones_proveedor }}</p>
+    </div>
+  </div>
+</div>
+{% endblock %}
