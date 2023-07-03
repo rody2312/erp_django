@@ -11,7 +11,7 @@
       <table class="table table-striped">
         <thead>
           <tr>
-            <th>ID</th>
+            <th>OP</th>
             <th>Gestión Comercial</th>
             <th>Cliente</th>
             <th>Contacto</th>
@@ -28,7 +28,7 @@
           </tr>
         </thead>
         <tbody>
-          {% for oportunidad in object_list %}
+          {% for oportunidad in oportunidad_list %}
           <tr>
             <td>{{ oportunidad.id_oportunidad }}</td>
             <td>{{ oportunidad.id_gestion_comercial }}</td>

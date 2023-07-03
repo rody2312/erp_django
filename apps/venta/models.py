@@ -1,10 +1,11 @@
 from django.db import models
-
 from apps.cotizacion.models import Cotizacion
+
 
 class Venta(models.Model):
     id_venta = models.AutoField(primary_key=True)
-    id_cotizacion = models.ForeignKey(Cotizacion, on_delete=models.CASCADE)
+    id_cotizacion = models.ForeignKey(
+        Cotizacion, on_delete=models.CASCADE, to_field='id_cotizacion')
     n_orden_compra = models.IntegerField()
     fecha_orden_compra = models.DateField()
     moneda = models.IntegerField()
