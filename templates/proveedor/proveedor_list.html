@@ -1,62 +1,80 @@
-{% extends 'base.html' %} {% block title %}Proveedor{% endblock title %} {% load
-static %} {% block content %}
-<div class="container my-5">
+{% extends 'base.html' %} 
+{% block title %}Proveedor{% endblock title %} 
+
+
+{% comment %} Importaciones de datatable {% endcomment %}
+{% block styles %}
+  {% include 'otros/datatable_styles.html' %}
+{% endblock styles %}
+
+{% block scripts %}
+  {% include 'otros/datatable_scripts.html' %}
+{% endblock scripts %}
+
+
+{% block content %}
+<div class="container-fluid">
   <div class="row">
     <div class="col-12">
-      <h2>Lista de Proveedores</h2>
-      <a href="{% url 'proveedor_new' %}" class="btn btn-primary"
-        >Nuevo Proveedor</a
-      >
-      <br /><br />
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>Id Proveedor</th>
-            <th>Nombre</th>
-            <th>Dirección</th>
-            <th>Código Postal</th>
-            <th>Localidad</th>
-            <th>País</th>
-            <th>Teléfono</th>
-            <th>Correo</th>
-            <th>Área</th>
-            <th>Observaciones</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for proveedor in proveedor_list %}
-          <tr>
-            <td>{{ proveedor.id_proveedor }}</td>
-            <td>{{ proveedor.nombre_proveedor }}</td>
-            <td>{{ proveedor.direccion_proveedor }}</td>
-            <td>{{ proveedor.codigo_postal_proveedor }}</td>
-            <td>{{ proveedor.localidad_proveedor }}</td>
-            <td>{{ proveedor.pais_proveedor }}</td>
-            <td>{{ proveedor.telefono_proveedor }}</td>
-            <td>{{ proveedor.correo_proveedor }}</td>
-            <td>{{ proveedor.area_proveedor }}</td>
-            <td>{{ proveedor.observaciones_proveedor }}</td>
-            <td>
-              <a
-                href="{% url 'proveedor_edit' proveedor.id_proveedor %}"
-                class="btn btn-warning"
-                >Editar</a
-              >
-              <a
-                href="{% url 'proveedor_delete' proveedor.id_proveedor %}"
-                class="btn btn-danger"
-                >Eliminar</a
-              >
-            </td>
-          </tr>
-          {% empty %}
-          <tr>
-            <td colspan="11">No hay proveedores registrados.</td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
+      <div class="card">
+
+        <div class="card-header">
+          <div class="d-flex justify-content-between">
+            <h2>Lista de Proveedores</h2>
+            <a href="{% url 'proveedor_new' %}" class="btn btn-primary">Nuevo Proveedor</a>
+          </div>
+        </div>
+      
+
+        <div class="card-body">
+          <table id="table" class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th>Id Proveedor</th>
+                <th>Nombre</th>
+                <th>Dirección</th>
+                <th>Código Postal</th>
+                <th>Localidad</th>
+                <th>País</th>
+                <th>Teléfono</th>
+                <th>Correo</th>
+                <th>Área</th>
+                <th>Observaciones</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for proveedor in proveedor_list %}
+              <tr>
+                <td>{{ proveedor.id_proveedor }}</td>
+                <td>{{ proveedor.nombre_proveedor }}</td>
+                <td>{{ proveedor.direccion_proveedor }}</td>
+                <td>{{ proveedor.codigo_postal_proveedor }}</td>
+                <td>{{ proveedor.localidad_proveedor }}</td>
+                <td>{{ proveedor.pais_proveedor }}</td>
+                <td>{{ proveedor.telefono_proveedor }}</td>
+                <td>{{ proveedor.correo_proveedor }}</td>
+                <td>{{ proveedor.area_proveedor }}</td>
+                <td>{{ proveedor.observaciones_proveedor }}</td>
+                <td>
+                  <a
+                    href="{% url 'proveedor_edit' proveedor.id_proveedor %}"
+                    class="btn btn-warning"
+                    >Editar</a
+                  >
+                  <a
+                    href="{% url 'proveedor_delete' proveedor.id_proveedor %}"
+                    class="btn btn-danger"
+                    >Eliminar</a
+                  >
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      
     </div>
   </div>
 </div>
