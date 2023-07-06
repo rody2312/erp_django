@@ -5,12 +5,10 @@ from .views import (
     OportunidadCreateView,
     OportunidadUpdateView,
     OportunidadDeleteView,
-    index
 )
 
 
 urlpatterns = [
-    # path('', index, name='index'),
     path('', OportunidadListView.as_view(), name='oportunidad_list'),
     path('<int:pk>/', OportunidadDetailView.as_view(), name='oportunidad_detail'),
     path('nueva/', OportunidadCreateView.as_view(), name='oportunidad_new'),

@@ -7,10 +7,6 @@ from .models import Oportunidad
 from .forms import OportunidadForm
 
 
-def index(request):
-    return render(request, 'index.html')
-
-
 class OportunidadListView(ListView):
     model = Oportunidad
     template_name = 'oportunidad/oportunidad_list.html'
