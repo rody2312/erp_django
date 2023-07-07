@@ -6,6 +6,17 @@ class VentaForm(forms.ModelForm):
     class Meta:
         model = Venta
         fields = '__all__'
+        labels = {
+            'id_cotizacion': 'Cotización',
+            'n_orden_compra': 'Número de orden de compra',
+            'fecha_orden_compra': 'Fecha Orden de Compra',
+            'moneda': 'Moneda',
+            'tipo_cambio': 'Tipo de cambio',
+            'fecha_entrega_oc': 'Fecha entrega oc',
+            'fecha_facturacion': 'Fecha facturación',
+            'utilidad_esperada': 'Utilidad esperada',
+            'observaciones': 'Observaciones',
+        }
         widgets = {
             'id_cotizacion': forms.Select(attrs={'class': 'form-control'}),
             'n_orden_compra': forms.NumberInput(attrs={'class': 'form-control'}),

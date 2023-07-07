@@ -19,6 +19,17 @@ class ClienteForm(forms.ModelForm):
     class Meta:
         model = Cliente
         fields = '__all__'
+        labels = {
+            'nombre_cliente': 'Nombre de cliente',
+            'direccion_cliente': 'Direccion de cliente',
+            'codigo_postal_cliente': 'Codigo postal',
+            'localidad_cliente': 'Localidad',
+            'pais_cliente': 'Pais',
+            'telefono_cliente': 'Telefono',
+            'correo_cliente': 'Correo',
+            'area_cliente': 'Area',
+            'observaciones_cliente': 'Observaciones',
+        }
         widgets = {
             'id_cliente': forms.Select(attrs={'class': 'form-control'}),
             'nombre_cliente': forms.TextInput(attrs={'class': 'form-control'}),

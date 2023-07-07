@@ -42,7 +42,7 @@
             <tbody>
               {% for cotizacion in cotizacion_list %}
               <tr>
-                <td>{{ cotizacion.id_oportunidad }}</td>
+                <td>{{ cotizacion.id_oportunidad.pk }}</td>
                 <td>{{ cotizacion.id_incoterm }}</td>
                 <td>{{ cotizacion.tipo_operacion }}</td>
                 <td>{{ cotizacion.fecha_cotizacion }}</td>

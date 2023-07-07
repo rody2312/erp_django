@@ -6,6 +6,15 @@ class CotizacionForm(forms.ModelForm):
     class Meta:
         model = Cotizacion
         fields = '__all__'
+        labels = {
+            'id_oportunidad': 'Oportunidad',
+            'id_incoterm': 'Incoterm',
+            'tipo_operacion': 'Tipo de Operación',
+            'fecha_cotizacion': 'Fecha de Cotización',
+            'moneda': 'Moneda',
+            'tipo_cambio': 'Tipo de Cambio',
+            'plazo_entrega': 'Plazo de Entrega',
+        }
         widgets = {
             'id_oportunidad': forms.Select(attrs={'class': 'form-control'}),
             'id_incoterm': forms.NumberInput(attrs={'class': 'form-control'}),

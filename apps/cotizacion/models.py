@@ -12,5 +12,8 @@ class Cotizacion(models.Model):
     tipo_cambio = models.CharField(max_length=50)
     plazo_entrega = models.DateField()
 
+    def __str__(self):
+        return str(self.id_cotizacion)
+
     class Meta:
         db_table = 'cotizacion'

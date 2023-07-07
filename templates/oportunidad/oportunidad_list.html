@@ -50,10 +50,10 @@
               {% for oportunidad in oportunidad_list %}
               <tr>
                 <td>{{ oportunidad.id_gestion_comercial }}</td>
-                <td>{{ oportunidad.id_cliente }}</td>
+                <td>{{ oportunidad.id_cliente.nombre }}</td>
                 <td>{{ oportunidad.id_contacto }}</td>
                 <td>{{ oportunidad.id_proveedor }}</td>
-                <td>{{ oportunidad.id_area }}</td>
+                <td>{{ oportunidad.area }}</td>
                 <td>{{ oportunidad.alcance }}</td>
                 <td>{{ oportunidad.fecha_inicio }}</td>
                 <td>{{ oportunidad.fecha_termino }}</td>
