@@ -29,7 +29,10 @@
           <table id="table" class="table table-bordered table-striped">
             <thead>
               <tr>
+                <th>ID</th>
                 <th>ID Oportunidad</th>
+                <th>Cliente</th>
+                <th>Proveedor</th>
                 <th>ID Incoterm</th>
                 <th>Tipo de operacion</th>
                 <th>Fecha de cotizacion</th>
@@ -42,7 +45,10 @@
             <tbody>
               {% for cotizacion in cotizacion_list %}
               <tr>
+                <td>{{ cotizacion.pk }}</td>
                 <td>{{ cotizacion.id_oportunidad.pk }}</td>
+                <td>{{ cotizacion.id_oportunidad.id_cliente }}</td>
+                <td>{{ cotizacion.id_oportunidad.id_proveedor }}</td>
                 <td>{{ cotizacion.id_incoterm }}</td>
                 <td>{{ cotizacion.tipo_operacion }}</td>
                 <td>{{ cotizacion.fecha_cotizacion }}</td>

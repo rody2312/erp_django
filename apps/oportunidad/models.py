@@ -1,5 +1,8 @@
 from django.db import models
 
+from apps.cliente.models import Cliente
+from apps.proveedor.models import Proveedor
+
 
 class Oportunidad(models.Model):
 
@@ -15,9 +18,9 @@ class Oportunidad(models.Model):
     ]
     id_oportunidad = models.AutoField(primary_key=True)
     id_gestion_comercial = models.IntegerField()
-    nombre_cliente = models.CharField(max_length=100, default='')
+    id_cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE, null=True)
+    id_proveedor = models.ForeignKey(Proveedor, on_delete=models.CASCADE, null=True)
     nombre_contacto = models.CharField(max_length=100, default='')
-    nombre_proveedor = models.CharField(max_length=100, default='')
     area = models.CharField(max_length=100, choices=AREA_CHOICES, default='')
     alcance = models.CharField(max_length=200)
     fecha_inicio = models.DateField()
@@ -27,5 +30,8 @@ class Oportunidad(models.Model):
     probabilidad_a_oc = models.IntegerField()
     observaciones = models.CharField(max_length=100)
 
+    def __str__(self):
+        return str(self.id_oportunidad)
+    
     class Meta:
         db_table = 'oportunidad'

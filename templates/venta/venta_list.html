@@ -34,6 +34,8 @@
             <thead>
               <tr>
                 <th>Orden de compra</th>
+                <th>Cliente</th>
+                <th>Proveedor</th>
                 <th>Cotizacion</th>
                 <th>Fecha</th>
                 <th>Moneda</th>
@@ -49,6 +51,8 @@
               {% for venta in venta_list %}
               <tr>
                 <td>{{ venta.n_orden_compra }}</td>
+                <td>{{ venta.id_cotizacion.id_oportunidad.id_cliente }}</td>
+                <td>{{ venta.id_cotizacion.id_oportunidad.id_proveedor }}</td>
                 <td>{{ venta.id_cotizacion }}</td>
                 <td>{{ venta.fecha_orden_compra }}</td>
                 <td>{{ venta.moneda }}</td>

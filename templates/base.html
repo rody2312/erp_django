@@ -154,35 +154,59 @@
               data-accordion="false"
             >
               <li class="nav-item">
-                <a href="{% url 'cliente_list' %}" class="nav-link">
-                  <i class="nav-icon fas fa-users"></i>
-                  <p>Clientes</p>
+                <a href="#" class="nav-link">
+                  <i class="nav-icon fas fa-file"></i>
+                  <p>
+                    Archivos
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
                 </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="{% url 'cliente_list' %}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Clientes</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{% url 'proveedor_list' %}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Proveedor</p>
+                    </a>
+                  </li>
+                </ul>
               </li>
+
               <li class="nav-item">
-                <a href="{% url 'proveedor_list' %}" class="nav-link">
-                  <i class="nav-icon fas fa-box"></i>
-                  <p>Proveedor</p>
+                <a href="#" class="nav-link">
+                  <i class="nav-icon fas fa-stream"></i>
+                  <p>
+                    Movimientos
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
                 </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="{% url 'oportunidad_list' %}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Oportunidades</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{% url 'cotizacion_list' %}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Cotizaciones</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{% url 'venta_list' %}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Ventas</p>
+                    </a>
+                  </li>
+                </ul>
               </li>
-              <li class="nav-item">
-                <a href="{% url 'cotizacion_list' %}" class="nav-link">
-                  <i class="nav-icon fas fa-tags"></i>
-                  <p>Cotizaciones</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{% url 'oportunidad_list' %}" class="nav-link">
-                  <i class="nav-icon fas fa-tasks"></i>
-                  <p>Oportunidades</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{% url 'venta_list' %}" class="nav-link">
-                  <i class="nav-icon fas fa-receipt"></i>
-                  <p>Ventas</p>
-                </a>
-              </li>
+              
             </ul>
           </nav>
           <!-- /.sidebar-menu -->
