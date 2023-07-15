@@ -1,31 +1,29 @@
 {% extends 'base.html' %} 
-
 {% block title %}Oportunidades{% endblock title %}
+{% block breadcrumb %}Lista de Oportunidades{% endblock breadcrumb %}
 
+{%comment %} Importaciones de datatable {% endcomment %} 
+{% block styles %} 
+  {%include 'otros/datatable_styles.html' %} 
+{% endblock styles %} 
 
-{% comment %} Importaciones de datatable {% endcomment %}
-{% block styles %}
-  {% include 'otros/datatable_styles.html' %}
-{% endblock styles %}
-
-{% block scripts %}
-  {% include 'otros/datatable_scripts.html' %}
-{% endblock scripts %}
-
+{% block scripts%} 
+  {% include 'otros/datatable_scripts.html' %} 
+{% endblock scripts %} 
 
 {% block content %}
 <div class="container-fluid">
   <div class="row">
     <div class="col-12">
       <div class="card">
-
         <div class="card-header">
           <div class="d-flex justify-content-between">
             <h2>Lista de Oportunidades</h2>
-            <a href="{% url 'oportunidad_new' %}" class="btn btn-primary">Nuevo Oportunidad</a>
+            <a href="{% url 'oportunidad_new' %}" class="btn btn-primary"
+              >Nuevo Oportunidad</a
+            >
           </div>
         </div>
-      
 
         <div class="card-body">
           <table id="table" class="table table table-bordered table-striped">
@@ -37,11 +35,11 @@
                 <th>Proveedor</th>
                 <th>Contacto</th>
                 <th>Área</th>
-                <th>Alcance</th>
                 <th>Fecha Inicio</th>
                 <th>Fecha Término</th>
                 <th>Monto Probable</th>
-                <th>Fecha de Facturación</th>
+                <th>Fecha Facturación</th>
+                <th>Más</th>
                 <th>Acciones</th>
               </tr>
             </thead>
@@ -52,17 +50,20 @@
                 <td>{{ oportunidad.id_gestion_comercial }}</td>
                 <td>{{ oportunidad.id_cliente }}</td>
                 <td>{{ oportunidad.id_proveedor }}</td>
-                <td>{{ oportunidad.id_contacto }}</td>
+                <td>{{ oportunidad.nombre_contacto }}</td>
                 <td>{{ oportunidad.area }}</td>
-                <td>{{ oportunidad.alcance }}</td>
                 <td>{{ oportunidad.fecha_inicio }}</td>
                 <td>{{ oportunidad.fecha_termino }}</td>
                 <td>{{ oportunidad.monto_probable }}</td>
                 <td>{{ oportunidad.fecha_facturacion }}</td>
                 <td>
-                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default">
-                    Detalles
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default-{{ oportunidad.pk }}">
+                    <i class="fas fa-plus-circle"></i>
                   </button>
+                </td>
+                <td class="d-flex justify-content-between">
+                  <a href="{% url 'oportunidad_edit' oportunidad.pk %}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                  <a href="{% url 'oportunidad_delete' oportunidad.pk %}" class="btn btn-danger"><i class="fas fa-trash"></i></a>
                 </td>
               </tr>
               {% endfor %}
@@ -70,29 +71,31 @@
           </table>
         </div>
       </div>
-
     </div>
   </div>
 </div>
-<div class="modal fade" id="modal-default">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title">Detalles</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+{% for oportunidad in oportunidad_list %}
+  <div class="modal fade" id="modal-default-{{ oportunidad.pk }}">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Detalles Oportunidad: {{oportunidad.pk}}</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Probabilidad a OC: {{ oportunidad.probabilidad_a_oc }}</p>
+          <p>Alcance: {{ oportunidad.alcance }}</p>
+          <p>Observaciones: {{ oportunidad.observaciones }}</p>
+        </div>
+        <div class="modal-footer justify-content-between">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+        </div>
       </div>
-      <div class="modal-body">
-        <p>{{ oportunidad.probabilidad_a_oc }}</p>
-        <p>{{ oportunidad.observaciones }}</p>
-      </div>
-      <div class="modal-footer justify-content-between">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
+      <!-- /.modal-content -->
     </div>
-    <!-- /.modal-content -->
+    <!-- /.modal-dialog -->
   </div>
-  <!-- /.modal-dialog -->
-</div>
+{% endfor %}
 {% endblock %}
