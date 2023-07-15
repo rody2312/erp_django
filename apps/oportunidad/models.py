@@ -2,7 +2,6 @@ from django.db import models
 
 
 class Oportunidad(models.Model):
-
     AREA_CHOICES = [
         ('agua', 'Agua'),
         ('mineria', 'Minería'),
@@ -12,6 +11,13 @@ class Oportunidad(models.Model):
         ('Oil & gas DP', 'Oil & Gas DP'),
         ('eolica', 'Eólica'),
         ('solar', 'Solar'),
+    ]
+    PROBABILIDAD_OC_CHOICES = [
+        (10, '10'),
+        (25, '25'),
+        (50, '50'),
+        (75, '75'),
+        (90, '90'),
     ]
     id_oportunidad = models.AutoField(primary_key=True)
     id_gestion_comercial = models.IntegerField()
@@ -24,7 +30,7 @@ class Oportunidad(models.Model):
     fecha_termino = models.DateField()
     monto_probable = models.IntegerField()
     fecha_facturacion = models.DateField()
-    probabilidad_a_oc = models.IntegerField()
+    probabilidad_a_oc = models.IntegerField(choices=PROBABILIDAD_OC_CHOICES)
     observaciones = models.CharField(max_length=100)
 
     class Meta:

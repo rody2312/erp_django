@@ -17,7 +17,7 @@ class OportunidadForm(forms.ModelForm):
             'fecha_termino': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
             'monto_probable': forms.NumberInput(attrs={'class': 'form-control'}),
             'fecha_facturacion': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
-            'probabilidad_a_oc': forms.NumberInput(attrs={'class': 'form-control'}),
+            'probabilidad_a_oc': forms.Select(attrs={'class': 'form-control'}),
             'observaciones': forms.TextInput(attrs={'class': 'form-control'}),
         }
 
@@ -32,4 +32,11 @@ class OportunidadForm(forms.ModelForm):
             ('Oil & gas DP', 'Oil & Gas DP'),
             ('eolica', 'Eólica'),
             ('solar', 'Solar'),
+        ]
+        self.fields['probabilidad_a_oc'].widget.choices = [
+            (10, '10'),
+            (25, '25'),
+            (50, '50'),
+            (75, '75'),
+            (90, '90'),
         ]
