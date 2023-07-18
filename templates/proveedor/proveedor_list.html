@@ -30,7 +30,7 @@
           <table id="table" class="table table-bordered table-striped">
             <thead>
               <tr>
-                <th>Id</th>
+                <th>ID</th>
                 <th>Nombre</th>
                 <th>Dirección</th>
                 <th>Código Postal</th>
@@ -56,17 +56,9 @@
                 <td>{{ proveedor.correo_proveedor }}</td>
                 <td>{{ proveedor.area_proveedor }}</td>
                 <td>{{ proveedor.observaciones_proveedor }}</td>
-                <td>
-                  <a
-                    href="{% url 'proveedor_edit' proveedor.id_proveedor %}"
-                    class="btn btn-warning"
-                    >Editar</a
-                  >
-                  <a
-                    href="{% url 'proveedor_delete' proveedor.id_proveedor %}"
-                    class="btn btn-danger"
-                    >Eliminar</a
-                  >
+                <td class="d-flex justify-content-between">
+                  <a href="{% url 'proveedor_edit' proveedor.pk %}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                  <a href="{% url 'proveedor_delete' proveedor.pk %}" class="btn btn-danger"><i class="fas fa-trash"></i></a>
                 </td>
               </tr>
               {% endfor %}
