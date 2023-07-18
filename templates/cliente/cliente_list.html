@@ -30,7 +30,7 @@
           <table id="table" class="table table-bordered table-striped">
             <thead>
               <tr>
-                <th>Id Cliente</th>
+                <th>ID</th>
                 <th>Nombre</th>
                 <th>Dirección</th>
                 <th>Código Postal</th>
@@ -56,17 +56,9 @@
                 <td>{{ cliente.correo_cliente }}</td>
                 <td>{{ cliente.area_cliente }}</td>
                 <td>{{ cliente.observaciones_cliente }}</td>
-                <td>
-                  <a
-                    href="{% url 'cliente_edit' cliente.id_cliente %}"
-                    class="btn btn-warning"
-                    >Editar</a
-                  >
-                  <a
-                    href="{% url 'cliente_delete' cliente.id_cliente %}"
-                    class="btn btn-danger"
-                    >Eliminar</a
-                  >
+                <td class="d-flex justify-content-between">
+                  <a href="{% url 'cliente_edit' cliente.pk %}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                  <a href="{% url 'cliente_delete' cliente.pk %}" class="btn btn-danger"><i class="fas fa-trash"></i></a>
                 </td>
               </tr>
               {% endfor %}

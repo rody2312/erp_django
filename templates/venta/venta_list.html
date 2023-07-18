@@ -33,42 +33,44 @@
           <table id="table" class="table table-bordered table-striped">
             <thead>
               <tr>
-                <th>Orden de compra</th>
+                <th>ID</th>
                 <th>Cotizacion</th>
+                <th>Orden de compra</th>
+                <th>Cliente</th>
+                <th>Proveedor</th>
+                <th>Contacto</th>
                 <th>Fecha</th>
                 <th>Moneda</th>
                 <th>Tipo de cambio</th>
-                <th>Fecha de entrega</th>
-                <th>Fecha de facturacion</th>
-                <th>Utilidad esperada</th>
-                <th>Observaciones</th>
+                <th>Fecha entrega</th>
+                <th>Fecha facturacion</th>
+                <th>Más</th>
                 <th>Acciones</th>
               </tr>
             </thead>
             <tbody>
               {% for venta in venta_list %}
               <tr>
-                <td>{{ venta.n_orden_compra }}</td>
+                <td>{{ venta.pk }}</td>
                 <td>{{ venta.id_cotizacion }}</td>
+                <td>{{ venta.n_orden_compra }}</td>
+                <td>{{ venta.id_cotizacion.id_oportunidad.id_cliente }}</td>
+                <td>{{ venta.id_cotizacion.id_oportunidad.id_proveedor }}</td>
+                <td>{{ venta.id_cotizacion.id_oportunidad.nombre_contacto }}</td>
                 <td>{{ venta.fecha_orden_compra }}</td>
                 <td>{{ venta.moneda }}</td>
                 <td>{{ venta.tipo_cambio }}</td>
                 <td>{{ venta.fecha_entrega_oc }}</td>
                 <td>{{ venta.fecha_facturacion }}</td>
-                <td>{{ venta.utilidad_esperada }}</td>
-                <td>{{ venta.observaciones }}</td>
     
                 <td>
-                  <a
-                    href="{% url 'venta_edit' venta.id_venta %}"
-                    class="btn btn-warning"
-                    >Editar</a
-                  >
-                  <a
-                    href="{% url 'venta_delete' venta.id_venta %}"
-                    class="btn btn-danger"
-                    >Eliminar</a
-                  >
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default-{{ venta.pk }}">
+                    <i class="fas fa-plus-circle"></i>
+                  </button>
+                </td>
+                <td class="d-flex justify-content-between">
+                  <a href="{% url 'venta_edit' venta.pk %}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                  <a href="{% url 'venta_delete' venta.pk %}" class="btn btn-danger"><i class="fas fa-trash"></i></a>
                 </td>
               </tr>
               {% endfor %}
@@ -80,4 +82,28 @@
     </div>
   </div>
 </div>
+
+{% for venta in venta_list %}
+  <div class="modal fade" id="modal-default-{{ venta.pk }}">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Detalles Venta: {{venta.pk}}</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Utilidad esperada: {{ venta.utilidad_esperada }}</p>
+          <p>Observaciones: {{ venta.observaciones }}</p>
+        </div>
+        <div class="modal-footer justify-content-between">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+{% endfor %}
 {% endblock %}

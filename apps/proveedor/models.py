@@ -32,5 +32,8 @@ class Proveedor(models.Model):
     area_proveedor = models.CharField(max_length=100, choices=AREAS_CHOICES)
     observaciones_proveedor = models.TextField()
 
+    def __str__(self):
+        return str(self.nombre_proveedor)
+    
     class Meta:
         db_table = 'proveedor'

@@ -15,5 +15,8 @@ class Venta(models.Model):
     utilidad_esperada = models.IntegerField()
     observaciones = models.CharField(max_length=100)
 
+    def __str__(self):
+        return str(self.id_venta)
+    
     class Meta:
         db_table = 'venta'
