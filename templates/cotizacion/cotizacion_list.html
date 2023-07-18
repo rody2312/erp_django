@@ -1,29 +1,28 @@
 {% extends 'base.html' %} 
-{% block title %}Cotizaciones{% endblock title %}
+
 
 {% comment %} Importaciones de datatable {% endcomment %}
-{% block styles %}
-  {% include 'otros/datatable_styles.html' %}
-{% endblock styles %}
+{% block styles %} 
+ {% include 'otros/datatable_styles.html' %} 
+{% endblock styles %} 
+ {% block scripts%}
+  {% include 'otros/datatable_scripts.html' %} 
+{% endblock scripts %} 
 
-{% block scripts %}
-  {% include 'otros/datatable_scripts.html' %}
-{% endblock scripts %}
-
-
+{% block title %}Cotizaciones{% endblock title %} 
 {% block content %}
 <div class="container-fluid">
   <div class="row">
     <div class="col-12">
       <div class="card">
-
         <div class="card-header">
           <div class="d-flex justify-content-between">
             <h2>Lista de Cotizaciones</h2>
-            <a href="{% url 'cotizacion_new' %}" class="btn btn-primary">Nuevo Cotización</a>
+            <a href="{% url 'cotizacion_new' %}" class="btn btn-primary"
+              >Nuevo Cotización</a
+            >
           </div>
         </div>
-      
 
         <div class="card-body">
           <table id="table" class="table table-bordered table-striped">
@@ -52,7 +51,7 @@
                 <td>{{ cotizacion.id_oportunidad.id_cliente }}</td>
                 <td>{{ cotizacion.id_oportunidad.id_proveedor }}</td>
                 <td>{{ cotizacion.id_oportunidad.nombre_contacto }}</td>
-                <td>{{ cotizacion.id_incoterm }}</td>
+                <td>{{ cotizacion.incoterm }}</td>
                 <td>{{ cotizacion.tipo_operacion }}</td>
                 <td>{{ cotizacion.fecha_cotizacion }}</td>
                 <td>{{ cotizacion.moneda }}</td>
@@ -73,7 +72,6 @@
           </table>
         </div>
       </div>
-      
     </div>
   </div>
 </div>
