@@ -1,7 +1,6 @@
 from django.db import models
 from apps.oportunidad.models import Oportunidad
 
-
 class Cotizacion(models.Model):
     id_cotizacion = models.AutoField(primary_key=True)
     id_oportunidad = models.ForeignKey(Oportunidad, on_delete=models.CASCADE)
@@ -37,6 +36,9 @@ class Cotizacion(models.Model):
     
     tipo_cambio = models.FloatField()
     plazo_entrega = models.DateField()
+    
+    # Agrega el campo fecha_cotizacion
+    fecha_cotizacion = models.DateField()
 
     def __str__(self):
         return str(self.id_cotizacion)

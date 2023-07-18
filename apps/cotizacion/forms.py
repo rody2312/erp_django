@@ -4,7 +4,8 @@ from .models import Cotizacion
 class CotizacionForm(forms.ModelForm):
     class Meta:
         model = Cotizacion
-        fields = '__all__'
+        fields = '__all__'  # Agrega el campo fecha_cotizacion aquí
+
         labels = {
             'id_oportunidad': 'Oportunidad',
             'incoterm': 'Incoterm',
@@ -23,6 +24,3 @@ class CotizacionForm(forms.ModelForm):
             'tipo_cambio': forms.NumberInput(attrs={'class': 'form-control'}),
             'plazo_entrega': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
         }
-
-        labels['tipo_cambio'] = 'Tipo de Cambio'
-        widgets['tipo_cambio'] = forms.NumberInput(attrs={'class': 'form-control'})
