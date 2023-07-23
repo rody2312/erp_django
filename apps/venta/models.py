@@ -17,8 +17,8 @@ class Venta(models.Model):
     fecha_entrega_oc = models.DateField()
     fecha_facturacion = models.DateField()
     utilidad_esperada = models.FloatField()
-    observaciones = models.TextField()
-    
+    observaciones = models.TextField(blank=True, null=True)  # Campo opcional
+
     def __str__(self):
         return str(self.id_venta)
 

@@ -1,7 +1,13 @@
 from django import forms
 from .models import Venta
+from apps.cotizacion.models import Cotizacion
 
 class VentaForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(VentaForm, self).__init__(*args, **kwargs)
+        # Modificar el queryset para el campo id_cotizacion para que se muestre en orden descendente
+        self.fields['id_cotizacion'].queryset = Cotizacion.objects.order_by('-id_cotizacion')
+
     class Meta:
         model = Venta
         fields = '__all__'

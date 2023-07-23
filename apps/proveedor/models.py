@@ -30,7 +30,7 @@ class Proveedor(models.Model):
     telefono_proveedor = models.IntegerField()
     correo_proveedor = models.EmailField()
     area_proveedor = models.CharField(max_length=100, choices=AREAS_CHOICES)
-    observaciones_proveedor = models.TextField()
+    observaciones_proveedor = models.TextField(blank=True, null=True)  # Campo opcional
 
     def __str__(self):
         return str(self.nombre_proveedor)

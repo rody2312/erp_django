@@ -1,11 +1,16 @@
 from django import forms
 from .models import Cotizacion
+from apps.oportunidad.models import Oportunidad
 
 class CotizacionForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(CotizacionForm, self).__init__(*args, **kwargs)
+        # Modificar el queryset para el campo id_oportunidad para que se muestre en orden descendente
+        self.fields['id_oportunidad'].queryset = Oportunidad.objects.order_by('-id_oportunidad')
+
     class Meta:
         model = Cotizacion
-        fields = '__all__'  # Agrega el campo fecha_cotizacion aquí
-
+        fields = '__all__'
         labels = {
             'id_oportunidad': 'Oportunidad',
             'incoterm': 'Incoterm',

@@ -1,8 +1,6 @@
 from django.db import models
-
 from apps.cliente.models import Cliente
 from apps.proveedor.models import Proveedor
-
 
 class Oportunidad(models.Model):
     AREA_CHOICES = [
@@ -34,7 +32,7 @@ class Oportunidad(models.Model):
     monto_probable = models.IntegerField()
     fecha_facturacion = models.DateField()
     probabilidad_a_oc = models.IntegerField(choices=PROBABILIDAD_OC_CHOICES)
-    observaciones = models.CharField(max_length=100)
+    observaciones = models.CharField(max_length=100, blank=True, null=True)  # Campo opcional
 
     def __str__(self):
         return str(self.id_oportunidad)
