@@ -1,2 +1,4 @@
 
-"""Django's command-line utility for administrative tasks."""
+
+if __name__ == '__main__':
+    main()

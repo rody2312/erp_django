@@ -1,7 +1,13 @@
 from django import forms
 from .models import Cotizacion
+from apps.oportunidad.models import Oportunidad
 
 class CotizacionForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(CotizacionForm, self).__init__(*args, **kwargs)
+        # Modificar el queryset para el campo id_oportunidad para que se muestre en orden descendente
+        self.fields['id_oportunidad'].queryset = Oportunidad.objects.order_by('-id_oportunidad')
+
     class Meta:
         model = Cotizacion
         fields = '__all__'
@@ -23,6 +29,3 @@ class CotizacionForm(forms.ModelForm):
             'tipo_cambio': forms.NumberInput(attrs={'class': 'form-control'}),
             'plazo_entrega': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
         }
-
-        labels['tipo_cambio'] = 'Tipo de Cambio'
-        widgets['tipo_cambio'] = forms.NumberInput(attrs={'class': 'form-control'})
