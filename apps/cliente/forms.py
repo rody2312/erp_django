@@ -40,7 +40,7 @@ class ClienteForm(forms.ModelForm):
             'telefono_cliente': forms.TextInput(attrs={'class': 'form-control'}),
             'correo_cliente': forms.EmailInput(attrs={'class': 'form-control'}),
             'area_cliente': forms.Select(attrs={'class': 'form-control'}),
-            'observaciones_cliente': forms.Textarea(attrs={'class': 'form-control'}),
+            'observaciones_cliente': forms.Textarea(attrs={'class': 'form-control', 'style': 'height: 10%;'}),
         }
 
     def __init__(self, *args, **kwargs):

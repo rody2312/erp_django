@@ -1,35 +1,60 @@
-{% extends 'base.html' %} 
+{% extends 'base.html' %}
+
 {% block title %}Oportunidades{% endblock title %}
-{% block breadcrumb %}Lista de Oportunidades{% endblock breadcrumb %}
 
-{%comment %} Importaciones de datatable {% endcomment %} 
-{% block styles %} 
-  {%include 'otros/datatable_styles.html' %} 
-{% endblock styles %} 
+{% block styles %}
+  {% include 'otros/datatable_styles.html' %}
+  <style>
+    /* Ajustar el tamaño del texto en las celdas */
+    @media (max-width: 768px) {
+      .table td, .table th {
+        font-size: 12px;
+      }
+      .acciones-buttons {
+        display: flex;
+        justify-content: space-between;
+      }
+    }
 
-{% block scripts%} 
-  {% include 'otros/datatable_scripts.html' %} 
-{% endblock scripts %} 
+    /* Ajustar el ancho máximo de las columnas */
+    .table th.numero-columna,
+    .table td.numero-columna,
+    .table th.acciones-columna,
+    .table td.acciones-columna {
+      max-width: 100px; /* Puedes ajustar el tamaño en píxeles según tus preferencias */
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  </style>
+{% endblock styles %}
+
+{% block scripts %}
+  {% include 'otros/datatable_scripts.html' %}
+  <script>
+    // Agrega scripts personalizados aquí si es necesario
+  </script>
+{% endblock scripts %}
 
 {% block content %}
 <div class="container-fluid">
   <div class="row">
-    <div class="col-12">
+    <div class="col-md-12">
       <div class="card">
+
         <div class="card-header">
           <div class="d-flex justify-content-between">
             <h2>Lista de Oportunidades</h2>
-            <a href="{% url 'oportunidad_new' %}" class="btn btn-primary"
-              >Nueva Oportunidad</a
-            >
+            <a href="{% url 'oportunidad_new' %}" class="btn btn-primary">Nueva Oportunidad</a>
           </div>
         </div>
 
         <div class="card-body">
-          <table id="table" class="table table table-bordered table-striped">
+          <!-- Eliminar la clase table-responsive para permitir que la tabla ocupe todo el ancho disponible -->
+          <table id="table" class="table table-bordered table-striped">
             <thead>
               <tr>
-                <th>OP</th>
+                <th class="numero-columna">OP</th>
                 <th>Gestión Comercial</th>
                 <th>Cliente</th>
                 <th>Proveedor</th>
@@ -39,14 +64,13 @@
                 <th>Fecha Término</th>
                 <th>Monto Probable</th>
                 <th>Fecha Facturación</th>
-                <th>Más</th>
-                <th>Acciones</th>
+                <th class="acciones-columna">Acciones</th>
               </tr>
             </thead>
             <tbody>
               {% for oportunidad in oportunidad_list %}
               <tr>
-                <td>{{ oportunidad.pk }}</td>
+                <td class="numero-columna">{{ oportunidad.pk }}</td>
                 <td>{{ oportunidad.id_gestion_comercial }}</td>
                 <td>{{ oportunidad.id_cliente }}</td>
                 <td>{{ oportunidad.id_proveedor }}</td>
@@ -57,13 +81,15 @@
                 <td>{{ oportunidad.monto_probable }}</td>
                 <td>{{ oportunidad.fecha_facturacion }}</td>
                 <td>
-                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default-{{ oportunidad.pk }}">
-                    <i class="fas fa-plus-circle"></i>
-                  </button>
-                </td>
-                <td class="d-flex justify-content-between">
-                  <a href="{% url 'oportunidad_edit' oportunidad.pk %}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
-                  <a href="{% url 'oportunidad_delete' oportunidad.pk %}" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                  <div class="d-block d-md-none acciones-buttons"> <!-- Mostrar acciones solo en pantallas pequeñas -->
+                    <a href="{% url 'oportunidad_edit' oportunidad.pk %}" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i></a>
+                    <a href="{% url 'oportunidad_delete' oportunidad.pk %}" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
+                  </div>
+                  <div class="d-none d-md-block"> <!-- Mostrar acciones solo en pantallas medianas y grandes -->
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default-{{ oportunidad.pk }}">
+                      <i class="fas fa-plus-circle"></i>
+                    </button>
+                  </div>
                 </td>
               </tr>
               {% endfor %}
@@ -74,6 +100,7 @@
     </div>
   </div>
 </div>
+
 {% for oportunidad in oportunidad_list %}
   <div class="modal fade" id="modal-default-{{ oportunidad.pk }}">
     <div class="modal-dialog">
@@ -91,11 +118,11 @@
         </div>
         <div class="modal-footer justify-content-between">
           <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+          <a href="{% url 'oportunidad_edit' oportunidad.pk %}" class="btn btn-warning"><i class="fas fa-edit"></i> Editar</a>
+          <a href="{% url 'oportunidad_delete' oportunidad.pk %}" class="btn btn-danger"><i class="fas fa-trash"></i> Eliminar</a>
         </div>
       </div>
-      <!-- /.modal-content -->
     </div>
-    <!-- /.modal-dialog -->
   </div>
 {% endfor %}
 {% endblock %}

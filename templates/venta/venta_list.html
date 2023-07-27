@@ -1,23 +1,45 @@
 {% extends 'base.html' %}
 
+{% block title %}Ventas{% endblock title %}
 
-{% comment %} Importaciones de datatable {% endcomment %}
 {% block styles %}
   {% include 'otros/datatable_styles.html' %}
+  <style>
+    /* Ajustar el tamaño del texto en las celdas */
+    @media (max-width: 768px) {
+      .table td, .table th {
+        font-size: 12px;
+      }
+      .acciones-buttons {
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+
+    /* Ajustar el ancho máximo de las columnas */
+    .table th.numero-columna,
+    .table td.numero-columna,
+    .table th.acciones-columna,
+    .table td.acciones-columna {
+      max-width: 100px; /* Puedes ajustar el tamaño en píxeles según tus preferencias */
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  </style>
 {% endblock styles %}
 
 {% block scripts %}
   {% include 'otros/datatable_scripts.html' %}
+  <script>
+    // Agrega scripts personalizados aquí si es necesario
+  </script>
 {% endblock scripts %}
-
-
-{% block title %}Ventas{% endblock title %}
 
 {% block content %}
 <div class="container-fluid">
   <div class="row">
-    <div class="col-12">
-      
+    <div class="col-md-12">
       <div class="card">
 
         <div class="card-header">
@@ -25,17 +47,16 @@
             <h2>Lista de Ventas</h2>
             <a href="{% url 'venta_new' %}" class="btn btn-primary">Nueva Venta</a>
           </div>
-          
-          
         </div>
 
         <div class="card-body">
+          <!-- Eliminar la clase table-responsive para permitir que la tabla ocupe todo el ancho disponible -->
           <table id="table" class="table table-bordered table-striped">
             <thead>
               <tr>
-                <th>NI</th>
-                <th>Cotizacion</th>
-                <th>Orden de compra</th>
+                <th class="numero-columna">NI</th>
+                <th class="numero-columna">Cotizacion</th>
+                <th class="numero-columna">Orden de compra</th>
                 <th>Cliente</th>
                 <th>Proveedor</th>
                 <th>Contacto</th>
@@ -44,16 +65,16 @@
                 <th>Tipo de cambio</th>
                 <th>Fecha entrega</th>
                 <th>Fecha facturacion</th>
-                <th>Más</th>
-                <th>Acciones</th>
+                <th class="acciones-columna">Acciones</th>
               </tr>
             </thead>
             <tbody>
               {% for venta in venta_list %}
               <tr>
-                <td>{{ venta.pk }}</td>
-                <td>{{ venta.id_cotizacion }}</td>
-                <td>{{ venta.n_orden_compra }}</td>
+                <td class="numero-columna">{{ venta.pk }}</td>
+                <!-- Datos de venta aquí -->
+                <td class="numero-columna">{{ venta.id_cotizacion }}</td>
+                <td class="numero-columna">{{ venta.n_orden_compra }}</td>
                 <td>{{ venta.id_cotizacion.id_oportunidad.id_cliente }}</td>
                 <td>{{ venta.id_cotizacion.id_oportunidad.id_proveedor }}</td>
                 <td>{{ venta.id_cotizacion.id_oportunidad.nombre_contacto }}</td>
@@ -62,15 +83,16 @@
                 <td>{{ venta.tipo_cambio }}</td>
                 <td>{{ venta.fecha_entrega_oc }}</td>
                 <td>{{ venta.fecha_facturacion }}</td>
-    
                 <td>
-                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default-{{ venta.pk }}">
-                    <i class="fas fa-plus-circle"></i>
-                  </button>
-                </td>
-                <td class="d-flex justify-content-between">
-                  <a href="{% url 'venta_edit' venta.pk %}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
-                  <a href="{% url 'venta_delete' venta.pk %}" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                  <div class="d-block d-md-none acciones-buttons"> <!-- Mostrar acciones solo en pantallas pequeñas -->
+                    <a href="{% url 'venta_edit' venta.pk %}" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i></a>
+                    <a href="{% url 'venta_delete' venta.pk %}" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
+                  </div>
+                  <div class="d-none d-md-block"> <!-- Mostrar acciones solo en pantallas medianas y grandes -->
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default-{{ venta.pk }}">
+                      <i class="fas fa-plus-circle"></i>
+                    </button>
+                  </div>
                 </td>
               </tr>
               {% endfor %}
@@ -78,7 +100,6 @@
           </table>
         </div>
       </div>
-      
     </div>
   </div>
 </div>
@@ -99,11 +120,11 @@
         </div>
         <div class="modal-footer justify-content-between">
           <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+          <a href="{% url 'venta_edit' venta.pk %}" class="btn btn-warning"><i class="fas fa-edit"></i> Editar</a>
+          <a href="{% url 'venta_delete' venta.pk %}" class="btn btn-danger"><i class="fas fa-trash"></i> Eliminar</a>
         </div>
       </div>
-      <!-- /.modal-content -->
     </div>
-    <!-- /.modal-dialog -->
   </div>
 {% endfor %}
 {% endblock %}

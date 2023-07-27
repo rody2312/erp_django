@@ -1,21 +1,47 @@
 {% extends 'base.html' %}
 
-{% comment %} Importaciones de datatable {% endcomment %}
-{% block styles %} 
-  {% include 'otros/datatable_styles.html' %} 
-{% endblock styles %} 
+{% block title %}Cotizaciones{% endblock title %}
+
+{% block styles %}
+  {% include 'otros/datatable_styles.html' %}
+  <style>
+    /* Ajustar el tamaño del texto en las celdas */
+    @media (max-width: 768px) {
+      .table td, .table th {
+        font-size: 12px;
+      }
+      .acciones-buttons {
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+
+    /* Ajustar el ancho máximo de las columnas */
+    .table th.numero-columna,
+    .table td.numero-columna,
+    .table th.acciones-columna,
+    .table td.acciones-columna {
+      max-width: 100px; /* Puedes ajustar el tamaño en píxeles según tus preferencias */
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  </style>
+{% endblock styles %}
 
 {% block scripts %}
-  {% include 'otros/datatable_scripts.html' %} 
-{% endblock scripts %} 
-
-{% block title %}Cotizaciones{% endblock title %} 
+  {% include 'otros/datatable_scripts.html' %}
+  <script>
+    // Agrega scripts personalizados aquí si es necesario
+  </script>
+{% endblock scripts %}
 
 {% block content %}
 <div class="container-fluid">
   <div class="row">
-    <div class="col-12">
+    <div class="col-md-12">
       <div class="card">
+
         <div class="card-header">
           <div class="d-flex justify-content-between">
             <h2>Lista de Cotizaciones</h2>
@@ -24,40 +50,43 @@
         </div>
 
         <div class="card-body">
+          <!-- Eliminar la clase table-responsive para permitir que la tabla ocupe todo el ancho disponible -->
           <table id="table" class="table table-bordered table-striped">
             <thead>
               <tr>
-                <th>COT</th>
+                <th class="numero-columna">COT</th>
                 <th>Oportunidad</th>
                 <th>Cliente</th>
                 <th>Proveedor</th>
                 <th>Contacto</th>
                 <th>Incoterm</th>
                 <th>Tipo de operacion</th>
-                <th>Fecha de cotizacion</th>  {# Nueva columna agregada #}
+                <th>Fecha de cotizacion</th>
                 <th>Moneda</th>
                 <th>Tipo de cambio</th>
                 <th>Plazo de entrega</th>
-                <th>Acciones</th>
+                <th class="acciones-columna">Acciones</th>
               </tr>
             </thead>
             <tbody>
               {% for cotizacion in cotizacion_list %}
               <tr>
-                <td>{{ cotizacion.pk }}</td>
+                <td class="numero-columna">{{ cotizacion.pk }}</td>
+                <!-- Datos de cotización aquí -->
                 <td>{{ cotizacion.id_oportunidad.pk }}</td>
                 <td>{{ cotizacion.id_oportunidad.id_cliente }}</td>
                 <td>{{ cotizacion.id_oportunidad.id_proveedor }}</td>
                 <td>{{ cotizacion.id_oportunidad.nombre_contacto }}</td>
                 <td>{{ cotizacion.incoterm }}</td>
                 <td>{{ cotizacion.tipo_operacion }}</td>
-                <td>{{ cotizacion.fecha_cotizacion }}</td>  {# Nueva columna mostrando la fecha de cotización #}
+                <td>{{ cotizacion.fecha_cotizacion }}</td>
                 <td>{{ cotizacion.moneda }}</td>
                 <td>{{ cotizacion.tipo_cambio }}</td>
                 <td>{{ cotizacion.plazo_entrega }}</td>
-                <td class="d-flex justify-content-between">
-                  <a href="{% url 'cotizacion_edit' cotizacion.pk %}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
-                  <a href="{% url 'cotizacion_delete' cotizacion.pk %}" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                <td>
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default-{{ cotizacion.pk }}">
+                    <i class="fas fa-plus-circle"></i>
+                  </button>
                 </td>
               </tr>
               {% endfor %}
@@ -68,4 +97,27 @@
     </div>
   </div>
 </div>
+
+{% for cotizacion in cotizacion_list %}
+  <div class="modal fade" id="modal-default-{{ cotizacion.pk }}">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Detalles Cotización: {{cotizacion.pk}}</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Información adicional de la cotización aquí...</p>
+        </div>
+        <div class="modal-footer justify-content-between">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+          <a href="{% url 'cotizacion_edit' cotizacion.pk %}" class="btn btn-warning"><i class="fas fa-edit"></i> Editar</a>
+          <a href="{% url 'cotizacion_delete' cotizacion.pk %}" class="btn btn-danger"><i class="fas fa-trash"></i> Eliminar</a>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endfor %}
 {% endblock %}

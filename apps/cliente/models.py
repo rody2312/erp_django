@@ -29,7 +29,7 @@ class Cliente(models.Model):
     telefono_cliente = models.IntegerField()
     correo_cliente = models.EmailField()
     area_cliente = models.CharField(max_length=100, choices=AREAS_CHOICES)
-    observaciones_cliente = models.TextField(blank=True, null=True)  # Campo opcional
+    observaciones_cliente = models.CharField(max_length=100, blank=True, null=True)  # Campo opcional
 
     def __str__(self):
         return str(self.nombre_cliente)
