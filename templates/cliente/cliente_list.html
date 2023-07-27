@@ -1,14 +1,36 @@
-{% extends 'base.html' %} 
+{% extends 'base.html' %}
 
 {% comment %} Importaciones de datatable {% endcomment %}
 {% block styles %}
   {% include 'otros/datatable_styles.html' %}
+  <style>
+    /* Ajustar el tamaño del texto en las celdas */
+    @media (max-width: 768px) {
+      .table td, .table th {
+        font-size: 12px;
+      }
+      .acciones-buttons {
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+
+    /* Ajustar el ancho máximo de las columnas */
+    .table th.numero-columna,
+    .table td.numero-columna,
+    .table th.acciones-columna,
+    .table td.acciones-columna {
+      max-width: 100px; /* Puedes ajustar el tamaño en píxeles según tus preferencias */
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  </style>
 {% endblock styles %}
 
 {% block scripts %}
   {% include 'otros/datatable_scripts.html' %}
 {% endblock scripts %}
-
 
 {% block title %}Clientes{% endblock title %} 
 
@@ -24,7 +46,6 @@
             <a href="{% url 'cliente_new' %}" class="btn btn-primary">Nuevo Cliente</a>
           </div>
         </div>
-      
 
         <div class="card-body">
           <table id="table" class="table table-bordered table-striped">
@@ -56,9 +77,11 @@
                 <td>{{ cliente.correo_cliente }}</td>
                 <td>{{ cliente.area_cliente }}</td>
                 <td>{{ cliente.observaciones_cliente }}</td>
-                <td class="d-flex justify-content-between">
-                  <a href="{% url 'cliente_edit' cliente.pk %}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
-                  <a href="{% url 'cliente_delete' cliente.pk %}" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                <td>
+                  <!-- Botón para mostrar detalles -->
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-detalle-{{ cliente.id_cliente }}">
+                    <i class="fas fa-plus-circle"></i>
+                  </button>
                 </td>
               </tr>
               {% endfor %}
@@ -69,4 +92,27 @@
     </div>
   </div>
 </div>
+
+{% for cliente in cliente_list %}
+  <!-- Modal de detalles -->
+  <div class="modal fade" id="modal-detalle-{{ cliente.id_cliente }}">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Acciones del Cliente: {{ cliente.id_cliente }}</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        
+        <div class="modal-footer justify-content-between">
+          <!-- Acciones relacionadas con el cliente -->
+          <a href="{% url 'cliente_edit' cliente.pk %}" class="btn btn-warning"><i class="fas fa-edit"></i> Editar</a>
+          <a href="{% url 'cliente_delete' cliente.pk %}" class="btn btn-danger"><i class="fas fa-trash"></i> Eliminar</a>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endfor %}
 {% endblock %}

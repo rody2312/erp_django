@@ -1,16 +1,38 @@
-{% extends 'base.html' %} 
-{% block title %}Proveedor{% endblock title %} 
-
+{% extends 'base.html' %}
 
 {% comment %} Importaciones de datatable {% endcomment %}
 {% block styles %}
   {% include 'otros/datatable_styles.html' %}
+  <style>
+    /* Ajustar el tamaño del texto en las celdas */
+    @media (max-width: 768px) {
+      .table td, .table th {
+        font-size: 12px;
+      }
+      .acciones-buttons {
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+
+    /* Ajustar el ancho máximo de las columnas */
+    .table th.numero-columna,
+    .table td.numero-columna,
+    .table th.acciones-columna,
+    .table td.acciones-columna {
+      max-width: 100px; /* Puedes ajustar el tamaño en píxeles según tus preferencias */
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  </style>
 {% endblock styles %}
 
 {% block scripts %}
   {% include 'otros/datatable_scripts.html' %}
 {% endblock scripts %}
 
+{% block title %}Proveedor{% endblock title %} 
 
 {% block content %}
 <div class="container-fluid">
@@ -24,7 +46,6 @@
             <a href="{% url 'proveedor_new' %}" class="btn btn-primary">Nuevo Proveedor</a>
           </div>
         </div>
-      
 
         <div class="card-body">
           <table id="table" class="table table-bordered table-striped">
@@ -56,9 +77,11 @@
                 <td>{{ proveedor.correo_proveedor }}</td>
                 <td>{{ proveedor.area_proveedor }}</td>
                 <td>{{ proveedor.observaciones_proveedor }}</td>
-                <td class="d-flex justify-content-between">
-                  <a href="{% url 'proveedor_edit' proveedor.pk %}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
-                  <a href="{% url 'proveedor_delete' proveedor.pk %}" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                <td>
+                  <!-- Botón para mostrar detalles -->
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-detalle-{{ proveedor.id_proveedor }}">
+                    <i class="fas fa-plus-circle"></i>
+                  </button>
                 </td>
               </tr>
               {% endfor %}
@@ -66,8 +89,30 @@
           </table>
         </div>
       </div>
-      
     </div>
   </div>
 </div>
+
+{% for proveedor in proveedor_list %}
+  <!-- Modal de detalles -->
+  <div class="modal fade" id="modal-detalle-{{ proveedor.id_proveedor }}">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Acciones del Proveedor: {{ proveedor.id_proveedor }}</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        
+        <div class="modal-footer justify-content-between">
+          <!-- Acciones relacionadas con el proveedor -->
+          <a href="{% url 'proveedor_edit' proveedor.pk %}" class="btn btn-warning"><i class="fas fa-edit"></i> Editar</a>
+          <a href="{% url 'proveedor_delete' proveedor.pk %}" class="btn btn-danger"><i class="fas fa-trash"></i> Eliminar</a>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endfor %}
 {% endblock %}
