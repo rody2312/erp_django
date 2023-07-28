@@ -55,9 +55,11 @@
                 <td>{{ cotizacion.moneda }}</td>
                 <td>{{ cotizacion.tipo_cambio }}</td>
                 <td>{{ cotizacion.plazo_entrega }}</td>
-                <td class="d-flex justify-content-between">
-                  <a href="{% url 'cotizacion_edit' cotizacion.pk %}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
-                  <a href="{% url 'cotizacion_delete' cotizacion.pk %}" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                <td>
+                  <div class="d-flex justify-content-between">
+                    <a href="{% url 'cotizacion_edit' cotizacion.pk %}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                    <a href="{% url 'cotizacion_delete' cotizacion.pk %}" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                  </div>
                 </td>
               </tr>
               {% endfor %}

@@ -56,9 +56,11 @@
                 <td>{{ proveedor.correo_proveedor }}</td>
                 <td>{{ proveedor.area_proveedor }}</td>
                 <td>{{ proveedor.observaciones_proveedor }}</td>
-                <td class="d-flex justify-content-between">
-                  <a href="{% url 'proveedor_edit' proveedor.pk %}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
-                  <a href="{% url 'proveedor_delete' proveedor.pk %}" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                <td>
+                  <div class="d-flex justify-content-between">
+                    <a href="{% url 'proveedor_edit' proveedor.pk %}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                    <a href="{% url 'proveedor_delete' proveedor.pk %}" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                  </div>
                 </td>
               </tr>
               {% endfor %}

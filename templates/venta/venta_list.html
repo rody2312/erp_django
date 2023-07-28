@@ -68,9 +68,11 @@
                     <i class="fas fa-plus-circle"></i>
                   </button>
                 </td>
-                <td class="d-flex justify-content-between">
-                  <a href="{% url 'venta_edit' venta.pk %}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
-                  <a href="{% url 'venta_delete' venta.pk %}" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                <td>
+                  <div class="d-flex justify-content-between">
+                    <a href="{% url 'venta_edit' venta.pk %}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                    <a href="{% url 'venta_delete' venta.pk %}" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                  </div>
                 </td>
               </tr>
               {% endfor %}

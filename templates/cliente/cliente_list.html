@@ -56,9 +56,11 @@
                 <td>{{ cliente.correo_cliente }}</td>
                 <td>{{ cliente.area_cliente }}</td>
                 <td>{{ cliente.observaciones_cliente }}</td>
-                <td class="d-flex justify-content-between">
-                  <a href="{% url 'cliente_edit' cliente.pk %}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
-                  <a href="{% url 'cliente_delete' cliente.pk %}" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                <td>
+                  <div class="d-flex justify-content-between">
+                    <a href="{% url 'cliente_edit' cliente.pk %}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                    <a href="{% url 'cliente_delete' cliente.pk %}" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                  </div>
                 </td>
               </tr>
               {% endfor %}
