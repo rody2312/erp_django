@@ -2191,7 +2191,7 @@
     highlightName: true,
     highlightPath: false,
     highlightClass: 'text-light',
-    notFoundText: 'No element found!'
+    notFoundText: 'No hay elementos'
   };
   var SearchItems = [];
   /**

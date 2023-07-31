@@ -22,8 +22,18 @@ class Oportunidad(models.Model):
     ]
     id_oportunidad = models.AutoField(primary_key=True)
     id_gestion_comercial = models.IntegerField()
-    id_cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE, null=True)
-    id_proveedor = models.ForeignKey(Proveedor, on_delete=models.CASCADE, null=True)
+    id_cliente = models.ForeignKey(
+        Cliente,
+        on_delete=models.CASCADE,
+        null=True,
+        related_name='oportunidades',
+    )
+    id_proveedor = models.ForeignKey(
+        Proveedor,
+        on_delete=models.CASCADE,
+        null=True,
+        related_name='oportunidades',
+    )
     nombre_contacto = models.CharField(max_length=100, default='')
     area = models.CharField(max_length=100, choices=AREA_CHOICES, default='')
     alcance = models.CharField(max_length=200)

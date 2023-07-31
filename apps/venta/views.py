@@ -2,7 +2,6 @@ from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.shortcuts import redirect
-
 from .models import Venta
 from .forms import VentaForm
 
@@ -10,7 +9,10 @@ from .forms import VentaForm
 class VentaListView(ListView):
     model = Venta
     template_name = 'venta/venta_list.html'
+    context_object_name = 'venta_list'
 
+def get_queryset(self):
+    return Venta.objects.order_by('-id_venta')  # El '-' indica orden descendente
 
 class VentaDetailView(DetailView):
     model = Venta

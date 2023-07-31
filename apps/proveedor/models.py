@@ -37,3 +37,4 @@ class Proveedor(models.Model):
     
     class Meta:
         db_table = 'proveedor'
+        ordering = ['nombre_proveedor']  # Ordenar proveedores alfabéticamente por el campo 'nombre_proveedor'

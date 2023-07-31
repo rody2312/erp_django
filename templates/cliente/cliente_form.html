@@ -1,22 +1,88 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<style>
+  .narrow-card {
+    width: 80%;
+  }
+
+
+
+  
+</style>
+  
+
+
+
+
+
+
 <div class="container my-5">
   <div class="row justify-content-center">
     <div class="col-12 col-md-8 col-lg-6">
-      <div class="card card-primary">
+      <div class="card card-primary mb-5 narrow-card">
         <div class="card-header">
           <h3 class="card-title">Formulario de Cliente</h3>
         </div>
         <form role="form" method="post">
           {% csrf_token %}
-          <div class="card-body">{{ form.as_p }}</div>
+          <div class="card-body">
+            <div class="form-row">
+              <div class="form-group col-md-6 mb-4">
+                <label for="{{ form.nombre_cliente.id_for_label }}">Nombre Cliente:</label>
+                {{ form.nombre_cliente }}
+              </div>
+              <div class="form-group col-md-6 mb-4">
+                <label for="{{ form.direccion_cliente.id_for_label }}">Dirección Cliente:</label>
+                {{ form.direccion_cliente }}
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6 mb-4">
+                <label for="{{ form.codigo_postal_cliente.id_for_label }}">Código Postal:</label>
+                {{ form.codigo_postal_cliente }}
+              </div>
+              <div class="form-group col-md-6 mb-4">
+                <label for="{{ form.localidad_cliente.id_for_label }}">Localidad Cliente:</label>
+                {{ form.localidad_cliente }}
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6 mb-4">
+                <label for="{{ form.pais_cliente.id_for_label }}">País Cliente:</label>
+                {{ form.pais_cliente }}
+              </div>
+              <div class="form-group col-md-6 mb-4">
+                <label for="{{ form.telefono_cliente.id_for_label }}">Teléfono Cliente:</label>
+                {{ form.telefono_cliente }}
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6 mb-4">
+                <label for="{{ form.correo_cliente.id_for_label }}">Correo Cliente:</label>
+                {{ form.correo_cliente }}
+              </div>
+              <div class="form-group col-md-6 mb-4">
+                <label for="{{ form.area_cliente.id_for_label }}">Área Cliente:</label>
+                {{ form.area_cliente }}
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-12 mb-4">
+                <label for="{{ form.observaciones_cliente.id_for_label }}">Observaciones:</label>
+                <textarea name="{{ form.observaciones_cliente.name }}" id="{{ form.observaciones_cliente.id_for_label }}" class="form-control" style="height: 150px; resize: none;" placeholder="{{ form.observaciones_cliente.label }}"></textarea>
+              </div>
+            </div>
+          </div>
 
           <div class="card-footer">
-            <button type="submit" class="btn btn-primary">Guardar</button>
+            <button type="submit" class="btn btn-primary btn-lg">Guardar</button>
           </div>
         </form>
       </div>
     </div>
   </div>
 </div>
-
 {% endblock %}

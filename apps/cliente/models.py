@@ -36,3 +36,4 @@ class Cliente(models.Model):
     
     class Meta:
         db_table = 'cliente'
+        ordering = ['nombre_cliente']  # Ordenar clientes alfabéticamente por el campo 'nombre_cliente'
